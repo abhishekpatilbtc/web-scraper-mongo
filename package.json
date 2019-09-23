@@ -1,7 +1,7 @@
 {
   "name": "web-scraper-mongo",
   "version": "1.0.0",
-  "description": "In this assignment, you'll create a web app that lets users view and leave comments on the latest news. But you're not going to actually write any articles; instead, you'll flex your Mongoose and Cheerio muscles to scrape news from another site.",
+  "description": "In this project, I created a web app that lets users view and leave comments on the latest news. I used Mongoose and Cheerio muscles to scrape news from another site.",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
