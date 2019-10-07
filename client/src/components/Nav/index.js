@@ -34,7 +34,7 @@ class Nav extends Component {
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light mb-2">
         <Link className="navbar-brand" to="/">
-          Google Books
+          Web Scrapper
         </Link>
         <button
           onClick={this.toggleNav}
