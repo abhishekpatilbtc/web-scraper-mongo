@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Jumbotron from "../components/Jumbotron";
 import Card from "../components/Card";
 import Form from "../components/Form";
-import Book from "../components/Book";
+import Article from "../components/Article";
 import Footer from "../components/Footer";
 import API from "../utils/API";
 import { Col, Row, Container } from "../components/Grid";
@@ -10,9 +10,9 @@ import { List } from "../components/List";
 
 class Home extends Component {
   state = {
-    books: [],
+    Articles: [],
     q: "",
-    message: "Search For A Book To Begin!"
+    message: "Search For A Article To Begin!"
   };
 
   handleInputChange = event => {
@@ -22,38 +22,38 @@ class Home extends Component {
     });
   };
 
-  getBooks = () => {
-    API.getBooks(this.state.q)
+  getArticles = () => {
+    API.getArticles(this.state.q)
       .then(res =>
         this.setState({
-          books: res.data
+          Articles: res.data
         })
       )
       .catch(() =>
         this.setState({
-          books: [],
-          message: "No New Books Found, Try a Different Query"
+          Articles: [],
+          message: "No New Articles Found, Try a Different Query"
         })
       );
   };
 
   handleFormSubmit = event => {
     event.preventDefault();
-    this.getBooks();
+    this.getArticles();
   };
 
-  handleBookSave = id => {
-    const book = this.state.books.find(book => book.id === id);
+  handleArticleSave = id => {
+    const Article = this.state.Articles.find(Article => Article.id === id);
 
-    API.saveBook({
-      googleId: book.id,
-      title: book.volumeInfo.title,
-      subtitle: book.volumeInfo.subtitle,
-      link: book.volumeInfo.infoLink,
-      authors: book.volumeInfo.authors,
-      description: book.volumeInfo.description,
-      image: book.volumeInfo.imageLinks.thumbnail
-    }).then(() => this.getBooks());
+    API.saveArticle({
+      googleId: Article.id,
+      title: Article.volumeInfo.title,
+      subtitle: Article.volumeInfo.subtitle,
+      link: Article.volumeInfo.infoLink,
+      authors: Article.volumeInfo.authors,
+      description: Article.volumeInfo.description,
+      image: Article.volumeInfo.imageLinks.thumbnail
+    }).then(() => this.getArticles());
   };
 
   render() {
@@ -69,7 +69,7 @@ class Home extends Component {
             </Jumbotron>
           </Col>
           <Col size="md-12">
-            <Card title="Book Search" icon="far fa-book">
+            <Card title="Article Search" icon="far fa-Article">
               <Form
                 handleInputChange={this.handleInputChange}
                 handleFormSubmit={this.handleFormSubmit}
@@ -81,20 +81,20 @@ class Home extends Component {
         <Row>
           <Col size="md-12">
             <Card title="Results">
-              {this.state.books.length ? (
+              {this.state.Articles.length ? (
                 <List>
-                  {this.state.books.map(book => (
-                    <Book
-                      key={book.id}
-                      title={book.volumeInfo.title}
-                      subtitle={book.volumeInfo.subtitle}
-                      link={book.volumeInfo.infoLink}
-                      authors={book.volumeInfo.authors.join(", ")}
-                      description={book.volumeInfo.description}
-                      image={book.volumeInfo.imageLinks.thumbnail}
+                  {this.state.Articles.map(Article => (
+                    <Article
+                      key={Article.id}
+                      title={Article.volumeInfo.title}
+                      subtitle={Article.volumeInfo.subtitle}
+                      link={Article.volumeInfo.infoLink}
+                      authors={Article.volumeInfo.authors.join(", ")}
+                      description={Article.volumeInfo.description}
+                      image={Article.volumeInfo.imageLinks.thumbnail}
                       Button={() => (
                         <button
-                          onClick={() => this.handleBookSave(book.id)}
+                          onClick={() => this.handleArticleSave(Article.id)}
                           className="btn btn-primary ml-2"
                         >
                           Save
