@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Jumbotron from "../components/Jumbotron";
 import Card from "../components/Card";
-import Book from "../components/Book";
+import Article from "../components/Article";
 import Footer from "../components/Footer";
 import API from "../utils/API";
 import { Col, Row, Container } from "../components/Grid";
@@ -9,25 +9,25 @@ import { List } from "../components/List";
 
 class Saved extends Component {
   state = {
-    books: []
+    articles: []
   };
 
   componentDidMount() {
-    this.getSavedBooks();
+    this.getSavedarticles();
   }
 
-  getSavedBooks = () => {
-    API.getSavedBooks()
+  getSavedarticles = () => {
+    API.getSavedarticles()
       .then(res =>
         this.setState({
-          books: res.data
+          articles: res.data
         })
       )
       .catch(err => console.log(err));
   };
 
-  handleBookDelete = id => {
-    API.deleteBook(id).then(res => this.getSavedBooks());
+  handlearticleDelete = id => {
+    API.deletearticle(id).then(res => this.getSavedarticles());
   };
 
   render() {
@@ -45,21 +45,21 @@ class Saved extends Component {
         </Row>
         <Row>
           <Col size="md-12">
-            <Card title="Saved Books" icon="download">
-              {this.state.books.length ? (
+            <Card title="Saved articles" icon="download">
+              {this.state.articles.length ? (
                 <List>
-                  {this.state.books.map(book => (
-                    <Book
-                      key={book._id}
-                      title={book.title}
-                      subtitle={book.subtitle}
-                      link={book.link}
-                      authors={book.authors.join(", ")}
-                      description={book.description}
-                      image={book.image}
+                  {this.state.articles.map(article => (
+                    <article
+                      key={article._id}
+                      title={article.title}
+                      subtitle={article.subtitle}
+                      link={article.link}
+                      authors={article.authors.join(", ")}
+                      description={article.description}
+                      image={article.image}
                       Button={() => (
                         <button
-                          onClick={() => this.handleBookDelete(book._id)}
+                          onClick={() => this.handlearticleDelete(article._id)}
                           className="btn btn-danger ml-2"
                         >
                           Delete
