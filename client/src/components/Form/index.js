@@ -1,30 +1,15 @@
 import React from "react";
 
-function Form({ q, handleInputChange, handleFormSubmit }) {
+function Form({ handleFormSubmit }) {
   return (
     <form>
-      <div className="form-group">
-        <label htmlFor="Query">
-          <strong>Article</strong>
-        </label>
-        <input
-          className="form-control"
-          id="Title"
-          type="text"
-          value={q}
-          placeholder="Ready Player One"
-          name="q"
-          onChange={handleInputChange}
-          required
-        />
-      </div>
-      <div className="pull-right">
+      <div className="pull-right text-center">
         <button
           onClick={handleFormSubmit}
           type="submit"
-          className="btn btn-lg btn-danger float-right"
+          className="btn btn-lg btn-danger"
         >
-          Search
+          Scrape
         </button>
       </div>
     </form>

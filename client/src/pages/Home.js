@@ -11,7 +11,6 @@ import { List } from "../components/List";
 class Home extends Component {
   state = {
     articles: [],
-    q: "",
     message: "Search For An Article To Begin!"
   };
 
@@ -23,16 +22,17 @@ class Home extends Component {
   };
 
   getarticles = () => {
-    API.getarticles(this.state.q)
+    API.getarticles()
       .then(res =>
+        
         this.setState({
-          articles: res.data
+          articles: res.data   
         })
       )
       .catch(() =>
         this.setState({
           articles: [],
-          message: "No New articles Found, Try a Different Query"
+          message: "No New Articles Found, Try a Different Query"
         })
       );
   };
@@ -43,16 +43,12 @@ class Home extends Component {
   };
 
   handlearticleSave = id => {
-    const article = this.state.articles.find(article => article.id === id);
+    const article = this.state.articles.find(article => article._id === id);
 
     API.savearticle({
-      googleId: article.id,
-      title: article.volumeInfo.title,
-      subtitle: article.volumeInfo.subtitle,
-      link: article.volumeInfo.infoLink,
-      authors: article.volumeInfo.authors,
-      description: article.volumeInfo.description,
-      image: article.volumeInfo.imageLinks.thumbnail
+      id: article._id,
+      title: article.title,
+      link: article.link,
     }).then(() => this.getarticles());
   };
 
@@ -71,9 +67,8 @@ class Home extends Component {
           <Col size="md-12">
             <Card title="Article Search" icon="far fa-article">
               <Form
-                handleInputChange={this.handleInputChange}
                 handleFormSubmit={this.handleFormSubmit}
-                q={this.state.q}
+            
               />
             </Card>
           </Col>
@@ -84,17 +79,12 @@ class Home extends Component {
               {this.state.articles.length ? (
                 <List>
                   {this.state.articles.map(article => (
-                    <article
-                      key={article.id}
-                      title={article.volumeInfo.title}
-                      subtitle={article.volumeInfo.subtitle}
-                      link={article.volumeInfo.infoLink}
-                      authors={article.volumeInfo.authors.join(", ")}
-                      description={article.volumeInfo.description}
-                      image={article.volumeInfo.imageLinks.thumbnail}
+                    <Article
+                      title={article.title}
+                      link={article.link}
                       Button={() => (
                         <button
-                          onClick={() => this.handlearticleSave(article.id)}
+                          onClick={() => this.handlearticleSave(article._id)}
                           className="btn btn-primary ml-2"
                         >
                           Save
