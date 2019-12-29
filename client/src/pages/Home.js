@@ -14,9 +14,6 @@ class Home extends Component {
     message: "Search For An Article To Begin!"
   };
 
-  componentDidMount() {
-    this.getArticles();
-}
 
   getArticles = () => {
     API.getArticles()
@@ -36,7 +33,6 @@ class Home extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     this.getArticles();
-    console.log(this.state.articles);
   };
 
   handlearticleSave = id => {
