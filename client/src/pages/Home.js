@@ -27,6 +27,7 @@ class Home extends Component {
       )
       .catch(() =>
         this.setState({
+          articles: [],
           message: "No New Articles Found, Try a Different Query"
         })
       );

@@ -1,5 +1,6 @@
 .jumbotron {
   padding: 100px;
-  background-image: url("./image/painting.jpg");
+  background-image: url("./image/wallpaper.jpg");
   background-size: cover;
+  color: gray;
 }
