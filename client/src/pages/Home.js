@@ -14,24 +14,19 @@ class Home extends Component {
     message: "Search For An Article To Begin!"
   };
 
-  handleInputChange = event => {
-    const { name, value } = event.target;
-    this.setState({
-      [name]: value
-    });
-  };
+  componentDidMount() {
+    this.getArticles();
+}
 
-  getarticles = () => {
-    API.getarticles()
+  getArticles = () => {
+    API.getArticles()
       .then(res =>
-        
         this.setState({
           articles: res.data   
         })
       )
       .catch(() =>
         this.setState({
-          articles: [],
           message: "No New Articles Found, Try a Different Query"
         })
       );
@@ -39,17 +34,18 @@ class Home extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-    this.getarticles();
+    this.getArticles();
+    console.log(this.state.articles);
   };
 
   handlearticleSave = id => {
-    const article = this.state.articles.find(article => article._id === id);
+    const article = this.state.articles.find(article => article.id === id);
 
     API.savearticle({
-      id: article._id,
+      articleid: article.id,
       title: article.title,
       link: article.link,
-    }).then(() => this.getarticles());
+    }).then(() => this.getArticles());
   };
 
   render() {
@@ -68,7 +64,6 @@ class Home extends Component {
             <Card title="Article Search" icon="far fa-article">
               <Form
                 handleFormSubmit={this.handleFormSubmit}
-            
               />
             </Card>
           </Col>
@@ -80,11 +75,12 @@ class Home extends Component {
                 <List>
                   {this.state.articles.map(article => (
                     <Article
+                     key={article.id}
                       title={article.title}
                       link={article.link}
                       Button={() => (
                         <button
-                          onClick={() => this.handlearticleSave(article._id)}
+                          onClick={() => this.handlearticleSave(article.id)}
                           className="btn btn-primary ml-2"
                         >
                           Save

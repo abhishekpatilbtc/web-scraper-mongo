@@ -36,7 +36,7 @@ module.exports = {
             articles: articlesArr
         }
         
-        res.send(obj);
+        res.json(obj.articles);
 
     }).catch(err => {
         res.json(err)

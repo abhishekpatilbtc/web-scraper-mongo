@@ -2,7 +2,7 @@ import axios from "axios";
 
 export default {
   // Gets Articles from the Scrape API
-  getarticles: function() {
+  getArticles: function() {
     return axios.get("/scrape");
   },
   // Gets all saved Articles
