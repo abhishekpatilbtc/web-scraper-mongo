@@ -51,10 +51,10 @@ class Home extends Component {
         <Row>
           <Col size="md-12">
             <Jumbotron>
-              <h1 className="text-center">
+              {/* <h1 className="text-center">
                 <strong>(React) Mongo Scrapper</strong>
-              </h1>
-              <h2 className="text-center">Scrape articles from the website</h2>
+              </h1> */}
+              <h2 className="text-center">(WSJ) Technology</h2>
             </Jumbotron>
           </Col>
           <Col size="md-12">

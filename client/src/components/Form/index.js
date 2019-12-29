@@ -7,7 +7,7 @@ function Form({ handleFormSubmit }) {
         <button
           onClick={handleFormSubmit}
           type="submit"
-          className="btn btn-lg btn-danger"
+          className="btn btn-lg btn-dark"
         >
           Scrape
         </button>
