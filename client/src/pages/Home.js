@@ -11,7 +11,7 @@ import { List } from "../components/List";
 class Home extends Component {
   state = {
     articles: [],
-    message: "Search For An Article To Begin!"
+    message: "Click on Scrape To Begin!"
   };
 
 
